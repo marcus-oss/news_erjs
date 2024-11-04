@@ -37,4 +37,11 @@ export const Wrapper = styled.button<{
   &:focus {
     ${(p) => THEME[p.variant].onHover};
   }
+  &:disabled {
+    background-color: ${(p) => THEME[p.variant].disabled.bg};
+    color: ${(p) => THEME[p.variant].disabled.color};
+
+    pointer-events: none;
+    border-color: transparent;
+  }
 `;
