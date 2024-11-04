@@ -22,20 +22,28 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     variant: "primary",
-    label: "Button",
+    label: "resetar senha",
   },
 };
 
 export const danger: Story = {
   args: {
     variant: "danger",
-    label: "Button",
+    label: "resetar senha",
   },
 };
 
 export const text: Story = {
   args: {
     variant: "text",
-    label: "Button",
+    label: "resetar senha",
+  },
+};
+
+export const disabled: Story = {
+  args: {
+    variant: "primary",
+    label: "resetar senha",
+    disabled: true,
   },
 };
