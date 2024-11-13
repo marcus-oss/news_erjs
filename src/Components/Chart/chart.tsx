@@ -1,90 +1,74 @@
-import { borderWidth, transparentize } from "polished";
+import { transparentize } from "polished";
 import { Line } from "react-chartjs-2";
 import styled from "styled-components";
 import Heading from "../typography/Heading";
+import NoData from "../NoData/NoData";
 
-const data = {
-  labels: ["Jan", "Fev", "Mar", "Abr", "Mai", "Jun"],
-  datasets: [
-    {
-      label: "Receitas",
-      data: [500, 400, 600, 100, 800, 20],
-      fill: true,
-      backgroundColor: "#0090FF",
-      borderColor: "#0090FF",
-      borderWidth: 0.5,
-      yAxisID: "cashflow",
-    },
-    {
-      label: "Despesas",
-      data: [100, 200, 250, 500, 1000, 600],
-      fill: true,
-      backgroundColor: "#274060",
-      borderColor: "#274060",
-      borderWidth: 0.5,
-      yAxisID: "cashflow",
-    },
-  ],
-};
 
-const options = {
+
+const options: Chart.ChartOptions = {
   maintainAspectRatio: true,
   elements: {
     line: {
-      tension: 0,
-    },
+      tension: 0
+    }
   },
   legend: {
     display: true,
-    position: "bottom",
-    align: "center",
+    position: 'bottom',
+    align: 'center',
     labels: {
-      usePointStyle: true,
-    },
+      usePointStyle: true
+    }
   },
   scales: {
     xAxes: [
       {
         display: true,
         gridLines: {
-          display: false,
-        },
-      },
+          display: false
+        }
+      }
     ],
     yAxes: [
       {
-        type: "linear",
+        type: 'linear',
         display: false,
-        position: "left",
-        id: "cashflow",
-      },
+        position: 'left',
+        id: 'cashflow',
+      }
     ],
   },
 };
 
-export interface ChartProps {}
+export interface ChartProps {
+  data: Chart.ChartData
+  title: string
+}
 
-export default function Chart() {
-  return (
-    <ChartWrapper style={{ width: 700 }}>
-      <div style={{ marginBottom: 16 }}>
-        <Heading level={3}>
-          {"Media de Performance nos últimos 12 meses"}
-        </Heading>
-      </div>
-      <Line
-        type="line"
-        height={139}
-        width={600}
-        data={data}
-        options={options}
-      />
-    </ChartWrapper>
-  );
+export default function Chart ({ data, title }: ChartProps) {
+  return <ChartWrapper style={{ width: 700 }}>
+    <div style={{ marginBottom: 16 }}>
+      <Heading level={3}>
+        {title}
+      </Heading>
+    </div>
+    {
+      data
+        ? <Line
+            type="line"
+            height={139}
+            width={600}
+            data={data}
+            options={options}
+          />
+        : <NoData height={139} />
+    }
+  </ChartWrapper>
 }
 
 const ChartWrapper = styled.div`
   text-align: center;
-  border: 1px solid ${transparentize(0.9, "#274060")};
+  border: 1px solid ${transparentize(0.9, '#274060')};
   padding: 20px;
-`;
+`
